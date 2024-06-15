@@ -41,3 +41,4 @@ function execute_command() {
 cmd="git br --color=always"
 execute_command "$cmd"
 choose_from_menu selected_choice "${lines[@]}"
+echo $selected_choice
