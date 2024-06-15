@@ -38,7 +38,18 @@ function execute_command() {
     IFS=$'\n' read -r -d '' -a lines <<< "$output"
 }
 
+function get_branch_from_line() {
+    raw_branch_name=`echo -e "$1" | sed -E 's/^\*?\s*([^ ]+).*/\1/'`
+}
+
+function clean_color_markers() {
+    clean_branch_name=`echo -e "$1" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g"`
+}
+
 cmd="git br --color=always"
 execute_command "$cmd"
 choose_from_menu selected_choice "${lines[@]}"
-echo $selected_choice
+get_branch_from_line "$selected_choice"
+clean_color_markers "$raw_branch_name"
+
+git checkout "$clean_branch_name"
