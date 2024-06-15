@@ -1,4 +1,5 @@
 #!/bin/bash
+# Found on Stackoverflow, I don't renember the link
 
 function choose_from_menu() {
     local prompt="$1" outvar="$2"
