@@ -1,12 +1,10 @@
 #!/bin/bash
 
 function choose_from_menu() {
-    local prompt="$1" outvar="$2"
-    shift
+    local outvar="$1"
     shift
     local options=("$@") cur=0 count=${#options[@]} index=0
     local esc=$(echo -en "\e")
-    printf "$prompt\n"
 
     while true
     do
@@ -42,4 +40,4 @@ function execute_command() {
 
 cmd="git br --color=always"
 execute_command "$cmd"
-choose_from_menu "Please make a choice:" selected_choice "${lines[@]}"
+choose_from_menu selected_choice "${lines[@]}"
