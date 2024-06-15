@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function choose_from_menu() {
+choose_from_menu() {
     local outvar="$1"
     shift
     local options=("$@") cur=0 count=${#options[@]} index=0
@@ -33,23 +33,23 @@ function choose_from_menu() {
     printf -v $outvar "${options[$cur]}"
 }
 
-function execute_command() {
+execute_command() {
     local output="$($1)"
     IFS=$'\n' read -r -d '' -a lines <<< "$output"
 }
 
-function get_branch_from_line() {
-    raw_branch_name=`echo -e "$1" | sed -E 's/^\*?\s*([^ ]+).*/\1/'`
+get_branch_from_line() {
+    echo -e "$1" | sed -E 's/^\*?\s*([^ ]+).*/\1/'
 }
 
-function clean_color_markers() {
-    clean_branch_name=`echo -e "$1" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g"`
+clean_color_markers() {
+    echo -e "$1" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g"
 }
 
 cmd="git br --color=always"
 execute_command "$cmd"
 choose_from_menu selected_choice "${lines[@]}"
-get_branch_from_line "$selected_choice"
-clean_color_markers "$raw_branch_name"
+raw_branch_name=$(get_branch_from_line "$selected_choice")
+clean_branch_name=$(clean_color_markers "$raw_branch_name")
 
 git checkout "$clean_branch_name"
