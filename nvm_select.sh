@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source common.sh
+source opti-choice-common.sh
 
 execute_command "nvm list"
 choose_from_menu selected_choice "${lines[@]}"
