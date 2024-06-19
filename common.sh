@@ -39,7 +39,7 @@ execute_command() {
     IFS=$'\n' read -r -d '' -a lines <<< "$($1)"
 }
 
-get_version_from_line() {
+get_fist_column_ignore_start() {
     echo -e "$1" | sed -E 's/^\*?\s*([^ ]+).*/\1/'
 }
 
