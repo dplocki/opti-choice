@@ -17,8 +17,8 @@ jobs:
 
     - name: Build project
       run: |
-        ./build.sh ${{ github.ref }}
+        ./build.sh ${{ github.ref_name }}
 
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "*.tar.gz"
+        artifacts: "optichoice-${{ github.ref_name }}.tar.gz"
