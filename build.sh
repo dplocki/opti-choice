@@ -2,6 +2,7 @@
 
 mkdir build
 
+cp README.md build/README.md
 cp src/git_switch_branch.sh build/git_switch_branch
 cp src/nvm_select.sh build/nvm_select
 cp src/opti-choice-common.sh build/opti-choice-common.sh
