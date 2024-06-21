@@ -1,0 +1,24 @@
+name: Create Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Build project
+      run: |
+        ./build.sh ${{ github.ref }}
+
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "*.tar.gz"
